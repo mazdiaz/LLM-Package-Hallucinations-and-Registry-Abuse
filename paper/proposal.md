@@ -136,6 +136,10 @@ TBD — pilot.
 3. **Practical:** Lightweight classifier that registry operators can use as a pre-registration early-warning signal.
 4. **Taxonomic:** Mapping of hallucinated names to Neupane's package-confusion categories, showing which attack patterns dominate.
 
+### 7.1 Novelty Statement
+
+Unlike RQ3 and RQ4, which build on established methodological precedents (Andriushchenko 2026; Neupane et al. 2023), **RQ1 and RQ2 address a gap in the peer-reviewed literature**: no prior work has measured the catch rate of registry anti-abuse defenses against LLM-hallucinated package names. Spracklen et al. (2025) measured hallucination *rate*; this work measures defense *effectiveness* — a distinct research question. This gap is the primary contribution of this work and differentiates it from prior literature.
+
 ## 8. Ethics
 
 See `README.md` and Section 4.8.
