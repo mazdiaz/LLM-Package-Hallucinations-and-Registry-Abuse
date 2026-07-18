@@ -1,7 +1,7 @@
 # Literature Review: LLM Package Hallucinations & Slopsquatting
 
 **Last updated:** 2026-07-18
-**Status:** Peer-reviewed only (37 sources in `refs.bib`). arXiv preprints held in `refs_arxiv_pending.bib` pending advisor approval. Blogs/whitepapers logged in `non_citable_context.md`.
+**Status:** Peer-reviewed only (37 sources in `refs.bib`). arXiv preprints EXCLUDED for this proposal cycle (cannot confirm policy with advisor; using strict academic-only bar). Blogs/whitepapers logged in `non_citable_context.md` for background only.
 
 ## Methodology
 
@@ -191,9 +191,8 @@ Reasons unchanged but strengthened:
 
 ## Next Actions
 
-1. **Confirm arXiv policy** with advisor → unlocks 10 more sources
-2. **Read Spracklen PDF in full** (Cluster 1 seminal)
-3. **Read Neupane 2023 PDF** (Cluster 9 — direct conceptual bridge)
-4. **Read Andriushchenko 2026 PDF** (Cluster 8 — RQ4 methodology)
-5. **Lock pivot** (D recommended)
-6. **Update `proposal.md`** with chosen pivot's RQs + methodology sketch
+1. **Read Spracklen PDF in full** (Cluster 1 seminal)
+2. **Read Neupane 2023 PDF** (Cluster 9 — direct conceptual bridge)
+3. **Read Andriushchenko 2026 PDF** (Cluster 8 — RQ4 methodology)
+4. **Lock pivot** (D recommended)
+5. **Update `proposal.md`** with chosen pivot's RQs + methodology sketch
