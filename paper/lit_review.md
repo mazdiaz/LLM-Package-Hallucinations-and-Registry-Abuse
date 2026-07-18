@@ -1,209 +1,184 @@
 # Literature Review: LLM Package Hallucinations & Slopsquatting
 
 **Last updated:** 2026-07-18
-**Status:** Merged findings (GPT-4 + direct arXiv/USENIX verification). 30 verified sources.
-**Verification:** All arXiv IDs verified live 2026-07-18.
+**Status:** Peer-reviewed only (18 sources in `refs.bib`). arXiv preprints held in `refs_arxiv_pending.bib` pending advisor approval. Blogs/whitepapers logged in `non_citable_context.md`.
 
 ## Methodology
 
 Sources cross-checked via:
-- Direct arXiv fetch (every paper ID returns expected title)
-- USENIX Security proceedings pages
-- Wikipedia slopsquatting entry (citations verified)
-- Vendor whitepapers (Trend Micro, Socket, CSA)
-- GPT-4 lit review (every citation manually verified)
+- CrossRef DOI resolution (every DOI returns expected title)
+- USENIX / IEEE / ACM proceedings pages
+- arXiv ID verification (live fetch)
+- Wikipedia slopsquatting entry (used as pointer only — not cited)
 
 ---
 
-## Cluster 1 — Package Hallucination Measurement (CORE)
+## Cluster 1 — Package Hallucination (Core)
+
+Only **one** peer-reviewed paper directly studies package hallucination by LLMs at scale.
 
 ### Spracklen et al. — USENIX Security 2025 ★ SEMINAL
 - **Title:** "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs"
-- **arXiv:** 2406.10279 | **Code:** github.com/Spracks/PackageHallucination (MIT)
 - **Affiliations:** UT San Antonio, Virginia Tech
 - **Method:** 16 LLMs × 2 prompt datasets × Python+JS → 576,000 samples
 - **Findings:** 19.7% avg hallucination (5.2% commercial, 21.7% open-source); 205,474 unique names; CodeLlama 7B/34B >33%
-- **Mitigations:** RAG, self-detection, fine-tuning (fine-tuning = largest reduction)
-- **Coverage:** RQ1 (Python/JS), RQ4 (mitigation). My RQ1 partially CLOSED.
+- **Mitigations evaluated:** RAG, self-detection, fine-tuning (fine-tuning = largest reduction)
+- **Coverage:** RQ1 (Python/JS), RQ4 (mitigation)
 
-### Churilov — arXiv 2605.17062 (May 2026)
-- **Title:** "The Range Shrinks, the Threat Remains"
-- **Code:** github.com/churik5/slopsquatting-replication-2026
-- **Method:** 5 frontier models (Claude Sonnet 4.6, Haiku 4.5, GPT-5.4-mini, Gemini 2.5 Pro, DeepSeek V3.2) × 199,845 prompts
-- **Findings:** Rates compressed to 4.62–6.10%; 127 model-agnostic hallucinated names; 53 still registrable after disclosure; DeepSeek/GPT J=0.343 (possible shared training data)
-- **Coverage:** RQ1 (frontier models), RQ2 (registerability after registry defenses). My RQ2 partially CLOSED for Python/JS.
-
-### Krishna et al. — arXiv 2501.19012 (2025)
-- **Title:** "Importing Phantoms: Measuring LLM Package Hallucination Vulnerabilities"
-- **Method:** Extends Spracklen to **Python, JavaScript, and Rust**
-- **Findings:** 0.22%–46.15% rates depending on model/language/task; larger models hallucinate less
-- **Coverage:** **Rust already covered.** My Pivot A (ecosystem expansion) severely weakened.
-
-### Haque et al. — arXiv 2512.08213 (2025)
-- **Title:** "Secure or Suspect? Investigating Package Hallucinations of Shell Command in Original and Quantized LLMs"
-- **Method:** 5 Qwen sizes, **Go** shell-command package recommendations, 3 datasets
-- **Findings:** Quantization materially worsens hallucination rate and vulnerability exposure
-- **Coverage:** **Go already covered** (shell-command framing). Pivot A further weakened.
-
-### Twist et al. — arXiv 2509.22202 (2025)
-- **Title:** "Library Hallucinations in LLMs: Risk Analysis Grounded in Developer Queries"
-- **Method:** 6 LLMs, prompt-variation stress tests (typos, temporal queries, fake library names)
-- **Findings:** One-character typos → 26% hallucination; fake names accepted up to 99%; temporal prompts → up to 84%
-- **Coverage:** Prompt-robustness angle of RQ1. Novel factor: realistic developer queries.
-
-### Lanyado — Lasso Security / Vulcan (2023-2024)
-- **Original case study:** huggingface-cli hallucination, 30k+ downloads in 3 months (2023)
-- **Extended study (2024):** 47,803 how-to questions, 5 languages, GPT-3.5/4/Gemini/Cohere; 215 cross-model hallucinated names
-
-### Large-Scale Skill Recommendation Study — arXiv 2607.12340 (July 2026)
-- Extends hallucination analysis to "skills" — adjacent to agentic tool recommendation
-- Most recent prior work; gap on **MCP/agent tools** still open
+**Implication:** Only one peer-reviewed paper exists on this exact topic. Field is wide open for follow-up work. Replication on 2026 frontier models and other ecosystems is publishable.
 
 ---
 
-## Cluster 2 — Mitigation of Code/Library/API Hallucination
-
-### Eghbali & Pradel — arXiv 2401.01701 (2024) "De-Hallucinator"
-- Iterative grounding with retrieved API references for code completion / test generation
-- Reduces API/library hallucinations; project-API focused, not package-registry
-
-### Chen et al. — arXiv 2505.05057 (2025) "MARIN"
-- Hierarchical dependency mining + constrained decoding
-- APIHulBench; outperforms RAG on API hallucination
-
-### Miranda-Pena et al. — arXiv 2604.07755 (2026)
-- Static analysis detects 14–85% of library hallucinations
-- Limited ceiling; multiple LLMs and analyzers
-
-### Khati et al. — arXiv 2601.19106 (2026)
-- Deterministic AST post-processor + library introspection
-- High precision on knowledge-conflicting errors; small curated Python set
-
-**Gap:** None directly solves "lightweight package-name classifier across registries pre-install." Real opening remains.
-
----
-
-## Cluster 3 — Software Supply Chain / Malicious Package Detection
-
-### Taylor et al. — SpellBound (arXiv 2003.03471, 2020)
-- Pre-install lexical/popularity warnings for typosquatting
-- 0.5% install warnings, ~2.5% overhead
-
-### Vu et al. — EuroS&PW 2020
-- PyPI typosquatting + combosquatting detection
-
-### Duan et al. — NDSS 2021 (MALOSS)
-- 339 new malicious packages discovered, 278 removed
-- Multi-signal measurement framework
+## Cluster 2 — Software Supply Chain Attack Taxonomies & Ecosystems
 
 ### Zimmermann et al. — USENIX Security 2019
-- npm ecosystem: dependency graph, maintainer concentration, blast radius
+"Small World with High Risks" — npm dependency/maintainer graph; blast-radius analysis.
+
+### Oh et al. — DIMVA 2020
+"Backstabber's Knife Collection" — Review of OSS supply chain attacks; dataset of malicious packages.
 
 ### Ladisa et al. — IEEE S&P 2023 (SoK)
-- 107 attack vectors, 94 incidents, 33 safeguards across OSS supply chains
-
-### Ladisa et al. — ACSAC 2023
-- Cross-language malicious-package detection (npm + PyPI); 58 new malicious packages removed
-
-### Huang et al. — DONAPI, USENIX Security 2024
-- Behavior-sequence knowledge mapping for npm malicious detection
-
-### Guo et al. — PyGuard, USENIX Security 2026
-- Knowledge-mining framework; 219 new malicious PyPI packages found
+"Taxonomy of Attacks on Open-Source Software Supply Chains" — 107 attack vectors, 94 incidents, 33 safeguards. Industry-standard reference for situating slopsquatting.
 
 ---
 
-## Cluster 4 — Registry Policy / Operational Response (WEAKEST)
+## Cluster 3 — Typosquatting / Combosquatting / Source-Package Discrepancy
 
-### PyPI Help / Project Quarantine (2024)
-- Confusable-name rejection at registration
-- Quarantine mechanism (since Aug 2024); ~140 projects quarantined
-- Report-as-malware workflow
+### Vu et al. — IEEE EuroS&PW 2020
+"Typosquatting and Combosquatting Attacks on the Python Ecosystem" — Pre-LLM slopsquatting predecessor. Direct lineage.
 
-### npm Disputes Policy
-- First-come, first-served
-- Narrow squatting definition; name transfers generally not done on demand
+### Vu et al. — ESEC/FSE 2021 (LastPyMile)
+Identifies discrepancy between published package and its source repo. Defense primitive useful for RQ4 framing.
 
-### Systematic Review (ResearchGate 2026)
-- 21 peer-reviewed + 7 industry reports synthesized
-- Maps defenses at IDE / registry / CI-CD / runtime layers
-- **READ FIRST for orientation**
+---
 
-### Industry
-- **Trend Micro** (Sean Park, 2026) — Principal Threat Researcher whitepaper
-- **Socket** — "Rise of Slopsquatting" (2025)
-- **Cloud Security Alliance** — Research Note (Apr 2026)
-- **VulnIQ** — original 2024 industry blog
-- **Governance:** Oh et al. IJAIBDCMS 2026 — PCI-DSS CI/CD pipelines
+## Cluster 4 — Malicious Package Detection (Defenses)
+
+### Duan et al. — NDSS 2021 (MALOSS)
+Multi-signal framework; 339 new malicious packages discovered, 278 removed.
+
+### Scalco et al. — ARES 2022
+npm injection detection.
+
+### Ladisa et al. — SCORED@CCS 2022
+Malicious Java package detection.
+
+### Ladisa et al. — SCORED@CCS 2023 (Hitchhiker's Guide)
+Malicious third-party dependencies; multi-ecosystem.
+
+### Ladisa et al. — ACSAC 2023
+Cross-language malicious package detection (npm + PyPI); 58 new malicious packages removed.
+
+### Huang et al. — USENIX Security 2024 (DONAPI)
+Behavior-sequence knowledge mapping for npm malicious package detection.
+
+### Liu et al. — ASE 2024
+"Towards Robust Detection of OSS Supply Chain Poisoning Attacks in Industry Environments."
+
+### SpiderScan — ASE 2024
+Graph-based behavior modeling for npm malicious package detection.
+
+### Gao et al. — USENIX Security 2025 (MalGuard)
+Real-time malicious package detection; 113 new malicious packages found.
+
+### Guo et al. — USENIX Security 2026 (PyGuard)
+Knowledge-mining framework for PyPI; 219 new malicious packages found.
+
+**Implication:** Malicious-package DETECTION is well-studied. Pre-INSTALL defense against hallucinated names specifically is NOT.
+
+---
+
+## Cluster 5 — Dependency Network Empirical Studies
+
+### Zerouali et al. — Empirical Software Engineering (journal) 2022
+Security vulnerability impact in npm and RubyGems dependency networks.
+
+---
+
+## Cluster 6 — Governance / Adjacent
+
+### Oh et al. — IJAIBDCMS 2026
+Governing AI-Generated Code in PCI-DSS Compliant CI/CD Pipelines.
 
 ---
 
 ## Gaps Identified (research opportunities)
 
-After Spracklen + Churilov + Krishna + Haque + Twist + mitigation cluster:
+After 18 peer-reviewed sources reviewed:
 
 | Gap | Status | Notes |
 |-----|--------|-------|
-| 1. Other ecosystems (Go, Rust, Ruby, Maven, NuGet) | **Mostly CLOSED** | Krishna=Rust, Haque=Go. Open: Ruby, Maven, NuGet, Swift, R, PHP, C++ |
-| 2. Agentic / MCP tool hallucination | **OPEN** | No canonical study. arXiv:2607.12340 starts on "skills". |
-| 3. Long-context / multi-turn effects | OPEN | Not studied |
-| 4. Real attack telemetry | OPEN | No confirmed in-the-wild attack (Wikipedia Jul 2026) |
-| 5. Adversarial fine-tuning / poisoning | OPEN | Not studied |
-| 6. Cross-lingual transfer | OPEN | Not studied |
-| 7. Cost-of-attack model | OPEN | Per-registry friction not quantified |
-| 8. IDE-specific codegen paths | OPEN | Copilot, Cursor, Cody not directly studied |
-| 9. Static-analysis detection at install | PARTIAL | Miranda-Pena, Khati touch this; registry-integrated classifier missing |
-| 10. **RQ3 — Registry defense benchmark** | **WIDE OPEN** | GPT-4 + my review both confirm no peer-reviewed study measures how often PyPI/npm defenses catch hallucination-driven registrations |
-| 11. **Cross-registry registerability systematic measurement** | OPEN | Churilov did post-disclosure on 53 names; broader systematic measurement missing |
+| 1. **Replication of Spracklen on 2026 frontier models** | **OPEN in peer-reviewed literature** | Churilov preprint exists but not peer-reviewed |
+| 2. **Ecosystems beyond Python/JS** | **OPEN in peer-reviewed literature** | Preprints exist for Rust (Krishna) and Go (Haque) but unpublished |
+| 3. **Registry defense benchmark (RQ3)** | **WIDE OPEN** | No peer-reviewed study measures whether PyPI/npm anti-abuse controls catch hallucination-driven registrations |
+| 4. **Agentic / MCP tool hallucination** | **OPEN** | No peer-reviewed study |
+| 5. **Long-context / multi-turn effects** | **OPEN** | Not studied |
+| 6. **Adversarial fine-tuning / poisoning** | **OPEN** | Not studied |
+| 7. **IDE-specific codegen paths** (Copilot, Cursor) | **OPEN** | Not studied directly |
+| 8. **Cross-lingual transfer of hallucinations** | **OPEN** | Not studied |
+| 9. **Real-world attack telemetry** | **OPEN** | No confirmed in-the-wild attack (per Wikipedia Jul 2026) |
 
 ---
 
 ## Revised Pivots (for 2-month proposal)
 
-### ~~Pivot A — Ecosystem Expansion~~ [DEAD]
-Krishna (2025) covers Rust, Haque (2025) covers Go. Only Ruby/Maven/NuGet/Swift remain — too thin.
+### ~~Pivot A — Ecosystem Expansion~~ [WEAKENED]
+Preprints (Krishna=Rust, Haque=Go) exist; if those get peer-reviewed before yours, you're scooped. Risky.
 
-### Pivot B — Agentic / MCP Hallucination [HIGH NOVELTY, RECOMMENDED]
-Hallucinations in agent tool calls (MCP servers, LangChain tools, OpenAI function-calling schema). No canonical registry of valid tools → must construct ground truth.
-- **Pros:** Hot topic, no direct prior work, high impact
-- **Cons:** Ground truth construction is research design challenge
+### Pivot B — Agentic / MCP Hallucination [HIGH NOVELTY]
+Hallucinations in agent tool calls (MCP servers, LangChain tools, function-calling schema). No peer-reviewed prior work.
+- **Pros:** Hot topic, fully open in peer-reviewed literature
+- **Cons:** Must construct ground-truth tool registry
 
 ### Pivot C — Adversarial Fine-Tuning Attack [VERY HIGH NOVELTY]
-Threat model: attacker publishes fine-tuned model or poisoned dataset that steers hallucinations toward attacker-owned package names.
-- **Pros:** Novel threat model, security venue appeal
-- **Cons:** Needs GPU; full study >2 months; proposal-only feasible
+Attacker fine-tunes model or poisons data to steer hallucinations to owned names.
+- **Pros:** Novel threat model
+- **Cons:** Needs GPU; full study >2 months
 
 ### Pivot D — Registry Defense Benchmark [STRONGEST GAP, RECOMMENDED]
-Systematically test whether PyPI and npm anti-abuse controls stop hallucination-driven registrations. Use Churilov's 53 registrable names + new ones from replications.
-- **Method:** Generate hallucinated names from current frontier models (extending Churilov); ethically measure which names would pass each registry's defenses using their published rules; build a static classifier predicting "evades defenses" vs "blocked".
-- **Pros:** Fills the clearest identified gap (both reviews confirm); reproducible; defensible ethics (no registration, only rule-based simulation + minimal coordination with registry teams); 2-month feasible
-- **Cons:** Less sexy than Pivot B; needs careful ethics framing
+Systematically test whether PyPI/npm anti-abuse controls catch hallucination-driven registrations.
+- **Method:** Use Spracklen/Churilov methodology to generate hallucinated names from current frontier models; ethically simulate each registry's defense rules; measure pass/block rates; build classifier predicting evasion.
+- **Pros:** Clearest peer-reviewed gap; reproducible; no package registration needed (fully ethical); 2-mo feasible
+- **Cons:** Less novel than Pivot B/C
 
-### Pivot E — Prompt-Variation Robustness Benchmark [MEDIUM NOVELTY]
-Extend Twist et al. with systematic prompt perturbation across all current frontier models × all major registries.
-- **Pros:** Methodology exists (Twist); reproducible
-- **Cons:** Twist already partially done; may be seen as incremental
+### Pivot E — Prompt-Variation Robustness
+Systematic perturbation across models × registries. Twist preprint exists but not peer-reviewed; could be first peer-reviewed.
 
 ---
 
 ## Top Recommendation
 
 **Pivot D (Registry Defense Benchmark).** Reasons:
-- Clearest open gap (both independent reviews confirm)
-- Builds directly on Churilov's coordinated-disclosure findings (53 names)
-- Does NOT require registering packages — fully ethical / undergraduate-safe
-- Produces novel dataset + classifier (RQ4-style mitigation contributes too)
-- Realistic 2-month timeline for proposal + preliminary results
+- Clearest peer-reviewed gap (Cluster 4 detection papers don't cover pre-install name validation against hallucinations)
+- Only one peer-reviewed paper (Spracklen) exists on core topic — strong differentiation possible
+- Builds on Spracklen methodology (code public, MIT licensed)
+- No package registration → fully ethical
+- 2-mo timeline realistic for proposal + preliminary results
 - Strong security venue appeal (NDSS/CCS/USENIX shape)
 
-**Backup:** Pivot B (MCP) if you can construct a clean ground-truth tool registry within week 1.
+**Backup:** Pivot B (MCP/agentic) if ground-truth registry can be constructed in week 1.
+
+---
+
+## Pending — Awaiting Advisor Decision on arXiv Policy
+
+If advisor approves arXiv preprints, incorporate from `refs_arxiv_pending.bib`:
+- Churilov 2026 (replication on frontier models)
+- Krishna 2025 (Rust)
+- Haque 2025 (Go, quantization)
+- Twist 2025 (prompt variation)
+- Eghbali 2024 De-Hallucinator, Chen 2025 MARIN, Miranda-Pena 2026, Khati 2026 (mitigation cluster)
+- Skill-recommendation study (arXiv:2607.12340)
+
+Adding these would strengthen related work and re-close some "gaps" above, further narrowing toward Pivot D as the clearest opening.
 
 ---
 
 ## Next Actions
 
-1. **Read Spracklen PDF in full** — download from `https://www.usenix.org/system/files/conference/usenixsecurity25/sec25cycle1-prepub-742-spracklen.pdf`
-2. **Read Churilov (10 pages, fast)** — arXiv:2605.17062
-3. **Read Systematic Review** — ResearchGate link, fastest orientation
-4. **Pick pivot (D or B)** by end of day
-5. **Update `proposal.md`** with chosen pivot's RQs
+1. **Confirm arXiv policy with advisor**
+2. **Read Spracklen PDF in full** (only peer-reviewed core paper)
+3. **Read Ladisa SoK (IEEE S&P 2023)** for supply-chain framing
+4. **Read Vu EuroS&PW 2020** for typosquatting defense precedent
+5. **Pick pivot (D or B)** by end of day
+6. **Update `proposal.md`** with chosen pivot's RQs
