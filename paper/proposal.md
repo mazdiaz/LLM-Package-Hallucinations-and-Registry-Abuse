@@ -28,7 +28,7 @@ Zimmermann et al. (USENIX Security 2019) — npm dependency graph and blast radi
 Vu et al. (EuroS&PW 2020) — PyPI typosquatting and combosquatting. Vu et al. (ESEC/FSE 2021) — LastPyMile, source-package discrepancy.
 
 ### 2.4 Malicious Package Detection
-Duan et al. (NDSS 2021, MALOSS) — 339 new malicious packages found. Scalco et al. (ARES 2022) — npm injection detection. Ladisa et al. (SCORED@CCS 2022, 2023; ACSAC 2023) — Java packages, third-party dependencies, cross-language detection. Huang et al. (USENIX Security 2024, DONAPI) — npm behavior-sequence mapping. Liu et al. (ASE 2024) — robust detection in industry. SpiderScan (ASE 2024) — graph-based behavior modeling. Gao et al. (USENIX Security 2025, MalGuard) — real-time detection. Guo et al. (USENIX Security 2026, PyGuard) — PyPI knowledge-mining.
+Duan et al. (NDSS 2021, MALOSS) — 339 new malicious packages found. Scalco et al. (ARES 2022) — npm injection detection. Ladisa et al. (SCORED@CCS 2022, 2023; ACSAC 2023) — Java packages, third-party dependencies, cross-language detection. Sejfia & Schäfer (ICSE 2022) — practical automated detection for npm. Huang et al. (USENIX Security 2024, DONAPI) — npm behavior-sequence mapping. Liu et al. (ASE 2024) — robust detection in industry. SpiderScan (ASE 2024) — graph-based behavior modeling. Gao et al. (USENIX Security 2025, MalGuard) — real-time detection. Guo et al. (USENIX Security 2026, PyGuard) — PyPI knowledge-mining.
 
 ### 2.5 Package Confusion & Install-Time Defenses (critical for this proposal)
 **Neupane et al. (USENIX Security 2023)** — "Beyond Typosquatting": 13 package-confusion categories, 360,333 confusion instances in npm. Conceptual bridge to slopsquatting. Taylor et al. (NSS 2020) — defending against package typosquatting. Ferreira et al. (ICSE 2021) — npm lightweight permission system. Wyss et al. (AsiaCCS 2022) — Latch, install-time attack mediation. Wyss et al. (ICSE 2022) — hidden code clones in npm.
@@ -37,15 +37,15 @@ Duan et al. (NDSS 2021, MALOSS) — 339 new malicious packages found. Scalco et 
 Pearce et al. (IEEE S&P 2022) — Copilot emits insecure code. Sandoval et al. (USENIX Security 2023) — user study, AI assistant security. Perry et al. (CCS 2023) — users write more insecure code with AI. Tony et al. (TOSEM 2025) — prompting for secure code. Fu et al. (TOSEM 2025) — Copilot weaknesses in GitHub. Mastropaolo et al. (ICSE 2023) — Copilot prompt robustness.
 
 ### 2.7 Code Hallucination Detection
-**Andriushchenko et al. (ACL Findings 2026)** — lightweight Transformer detector for code hallucinations using internal LLM representations. Closest peer-reviewed precedent for this proposal's classifier component.
+**Andriushchenko et al. (ACL Findings 2026)** — lightweight Transformer detector for code hallucinations using internal LLM representations. Closest peer-reviewed precedent for this proposal's classifier component. Builds on **Shelmanov et al. (EMNLP 2025)** pre-trained uncertainty quantification heads, which is the foundational methodology the RQ3 classifier adapts. **Tian et al. (AAAI 2025)** "CodeHalu" provides execution-based verification benchmark for code hallucinations.
 
 ### 2.8 Software Composition Analysis & SBOM
-Dann et al. (TSE 2022) — OSS vulnerability scanner challenges. Zhao et al. (ESEC/FSE 2023) — SCA for Java. Alfadel et al. (TOSEM 2023) — npm discoverability. Imtiaz et al. (TSE 2023) — security releases.
+Dann et al. (TSE 2022) — OSS vulnerability scanner challenges. Zhao et al. (ESEC/FSE 2023) — SCA for Java. Alfadel et al. (TOSEM 2023) — npm discoverability. Imtiaz et al. (TSE 2023) — security releases. Zahan et al. (ICSE-SEIP 2022) — weak links in npm supply chain.
 
 ### 2.9 SBOM, CI/CD, Supply Chain Integrity
 Xia et al. (ICSE 2023) — SBOM empirical study. Koishybayev et al. (USENIX Security 2022) — GitHub CI workflow security. Torres-Arias et al. (USENIX Security 2019) — in-toto supply chain integrity.
 
-See `lit_review.md` for full annotated review with 36 peer-reviewed sources.
+See `lit_review.md` for full annotated review with 40 peer-reviewed sources.
 
 ## 3. Research Questions
 

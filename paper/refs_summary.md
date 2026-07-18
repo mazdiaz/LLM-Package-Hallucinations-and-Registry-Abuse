@@ -2,7 +2,7 @@
 
 **Policy:** Every source below is peer-reviewed (conference proceedings, journal article, or peer-reviewed workshop). No arXiv-only preprints. No blogs. No whitepapers.
 
-**Total:** 36 sources organized by 10 clusters.
+**Total:** 40 sources organized by 10 clusters.
 
 ---
 
@@ -48,9 +48,11 @@
 
 14. **Huang, Y. et al. (2024).** *SpiderScan: Practical Detection of Malicious NPM Packages Based on Graph-Based Behavior Modeling and Matching.* In **Proceedings of the 39th IEEE/ACM International Conference on Automated Software Engineering (ASE)**. ACM. DOI: 10.1145/3691620.3695492
 
-15. **Gao, X. et al. (2025).** *MalGuard: Towards Real-Time, Accurate, and Actionable Detection of Malicious Packages.* In **34th USENIX Security Symposium (USENIX Security 25)**. USENIX Association.
+15. **Sejfia, A., & Schäfer, M. (2022).** *Practical Automated Detection of Malicious npm Packages.* In **Proceedings of the 44th International Conference on Software Engineering (ICSE)**. ACM. DOI: 10.1145/3510003.3510104
 
-16. **Guo, W., Liu, C., Kang, M., Zhang, Y., Wu, J., Xu, Z., Sachidananda, V., & Liu, Y. (2026).** *Cutting the Gordian Knot: Detecting Malicious PyPI Packages via a Knowledge-Mining Framework.* In **35th USENIX Security Symposium (USENIX Security 26)**. USENIX Association.
+16. **Gao, X. et al. (2025).** *MalGuard: Towards Real-Time, Accurate, and Actionable Detection of Malicious Packages.* In **34th USENIX Security Symposium (USENIX Security 25)**. USENIX Association.
+
+17. **Guo, W., Liu, C., Kang, M., Zhang, Y., Wu, J., Xu, Z., Sachidananda, V., & Liu, Y. (2026).** *Cutting the Gordian Knot: Detecting Malicious PyPI Packages via a Knowledge-Mining Framework.* In **35th USENIX Security Symposium (USENIX Security 26)**. USENIX Association.
 
 ---
 
@@ -78,7 +80,11 @@
 
 ## Cluster 7 — Code Hallucination Detection (peer-reviewed)
 
-24. **Andriushchenko, G., Garaev, R., Rvanova, L., Shelmanov, A., & Ivanov, V. V. (2026).** *Efficient Hallucination Detection in Automatic Code Generation.* In **Findings of the Association for Computational Linguistics: ACL 2026**, pp. 43197–43220. Association for Computational Linguistics. DOI: 10.18653/v1/2026.findings-acl.2143
+25. **Andriushchenko, G., Garaev, R., Rvanova, L., Shelmanov, A., & Ivanov, V. V. (2026).** *Efficient Hallucination Detection in Automatic Code Generation.* In **Findings of the Association for Computational Linguistics: ACL 2026**, pp. 43197–43220. Association for Computational Linguistics. DOI: 10.18653/v1/2026.findings-acl.2143
+
+26. **Shelmanov, A. et al. (2025).** *A Head to Predict and a Head to Question: Pre-trained Uncertainty Quantification Heads for Hallucination Detection in LLM Outputs.* In **Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (EMNLP)**, pp. 35712–35731. Association for Computational Linguistics. DOI: 10.18653/v1/2025.emnlp-main.1809
+
+27. **Tian, Y. et al. (2025).** *CodeHalu: Investigating Code Hallucinations in LLMs via Execution-based Verification.* In **Proceedings of the AAAI Conference on Artificial Intelligence**, pp. 25300–25308. AAAI Press. DOI: 10.1609/aaai.v39i24.34717
 
 ---
 

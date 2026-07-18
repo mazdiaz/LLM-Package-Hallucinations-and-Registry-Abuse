@@ -69,28 +69,30 @@ The peer-reviewed literature on LLM package hallucination is **extremely sparse*
 
 ---
 
-## 5. Literature Clusters (36 peer-reviewed sources in `refs.bib`)
+## 5. Literature Clusters (40 peer-reviewed sources in `refs.bib`)
 
 | Cluster | Count | Purpose |
 |---------|-------|---------|
 | 1. Package Hallucination (core) | 1 | Spracklen et al. (only peer-reviewed core paper) |
 | 2. Supply Chain Taxonomies & Ecosystems | 3 | Zimmermann, Oh Backstabber, Ladisa SoK |
 | 3. Typosquatting & Source Discrepancy | 2 | Vu EuroS&PW 2020, Vu LastPyMile 2021 |
-| 4. Malicious Package Detection | 10 | Duan MALOSS, Ladisa×3, Huang DONAPI, Liu, SpiderScan, Gao MalGuard, Guo PyGuard, Scalco |
+| 4. Malicious Package Detection | 11 | Duan MALOSS, Ladisa×3, Sejfia, Huang DONAPI, Liu, SpiderScan, Gao MalGuard, Guo PyGuard, Scalco |
 | 5. Dependency Network Empirical | 1 | Zerouali EMSE 2022 |
 | 6. AI Code Assistant Security | 6 | Pearce, Sandoval, Perry, Tony, Fu, Mastropaolo |
-| 7. Code Hallucination Detection | 1 | Andriushchenko ACL 2026 (RQ4 methodology precedent) |
+| 7. Code Hallucination Detection | 3 | Andriushchenko, Shelmanov (Uncertainty Heads), Tian CodeHalu |
 | 8. Package Confusion & Install-Time Defenses | 5 | Neupane (KEY), Taylor, Ferreira, Wyss×2 |
-| 9. SCA & Empirical Studies | 4 | Dann, Zhao, Alfadel, Imtiaz |
+| 9. SCA & Empirical Studies | 5 | Dann, Zhao, Alfadel, Imtiaz, Zahan |
 | 10. SBOM / CI/CD / Integrity | 3 | Xia, Koishybayev, Torres-Arias (in-toto) |
 
 ### Most Critical Sources for This Proposal
 
 1. **Spracklen et al. 2025 (USENIX Security)** — foundational; methodology scaffolding. Code: github.com/Spracks/PackageHallucination (MIT).
 2. **Neupane et al. 2023 (USENIX Security)** — "Beyond Typosquatting": 13 confusion categories, 360k npm confusion instances. Direct conceptual bridge to slopsquatting. Used in RQ4.
-3. **Andriushchenko et al. 2026 (ACL Findings)** — lightweight Transformer detector for code hallucinations. Methodology precedent for RQ3 classifier.
-4. **Taylor et al. 2020 (NSS)** — anti-typosquatting defense baseline.
-5. **Ladisa et al. 2023 (IEEE S&P)** — SoK supply chain taxonomy; framing.
+3. **Andriushchenko et al. 2026 (ACL Findings)** — lightweight Transformer detector for code hallucinations. Methodology precedent for RQ3 classifier. Builds on Shelmanov et al. (EMNLP 2025) uncertainty heads — also in `refs.bib`.
+4. **Shelmanov et al. 2025 (EMNLP)** — pre-trained uncertainty quantification heads. Foundational methodology the RQ3 classifier adapts.
+5. **Neupane et al. 2023 (USENIX Security)** — "Beyond Typosquatting": 13 confusion categories, 360k npm confusion instances. Direct conceptual bridge to slopsquatting. Used in RQ4.
+6. **Taylor et al. 2020 (NSS)** — anti-typosquatting defense baseline.
+7. **Ladisa et al. 2023 (IEEE S&P)** — SoK supply chain taxonomy; framing.
 
 ---
 
@@ -121,7 +123,7 @@ LLM-Package-Hallucinations-and-Registry-Abuse/
 
 **Done:**
 - Repository scaffolded and pushed to GitHub
-- 36 peer-reviewed sources verified and organized in `refs.bib` (every DOI/USENIX URL verified live)
+- 40 peer-reviewed sources verified and organized in `refs.bib` (every DOI/USENIX URL verified live)
 - Annotated literature review in `paper/lit_review.md`
 - Pivot D locked in `paper/proposal.md` with full methodology section
 - 8-week timeline drafted

@@ -1,7 +1,7 @@
 # Literature Review: LLM Package Hallucinations & Slopsquatting
 
 **Last updated:** 2026-07-18
-**Status:** Peer-reviewed only (36 sources in `refs.bib`). arXiv preprints EXCLUDED for this proposal cycle (cannot confirm policy with advisor; using strict academic-only bar). Blogs/whitepapers logged in `non_citable_context.md` for background only.
+**Status:** Peer-reviewed only (40 sources in `refs.bib`). arXiv preprints EXCLUDED for this proposal cycle (cannot confirm policy with advisor; using strict academic-only bar). Blogs/whitepapers logged in `non_citable_context.md` for background only.
 
 ## Methodology
 
