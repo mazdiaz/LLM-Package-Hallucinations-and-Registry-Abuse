@@ -88,19 +88,30 @@ Predict: **blocked** / **passes**.
 ### 4.5 Feature Engineering
 For each hallucinated name, extract:
 
-- Lexical: length, character n-grams, entropy.
-- Similarity: Levenshtein distance to top-N popular packages; Jaro-Winkler to top-1000.
+- Lexical: length, character n-grams, entropy. *(Note: Spracklen et al. 2025 found hallucinated names are "substantively different from existing package names" — only 13.4% have Levenshtein distance ≤2 to real packages, while 48.6% have distance ≥6. Pure string-distance features are expected to underperform and will be included only as baseline; the classifier will lean on semantic and model-consensus features instead.)*
+- Similarity: Levenshtein distance to top-N popular packages; Jaro-Winkler to top-1000 *(baseline features; expected weak signal per Spracklen)*.
+- **Semantic confusion category**: Neupane et al. (2023) 13-category taxonomy assignment *(primary signal — captures "substantively different" patterns better than lexical distance)*.
 - Model consensus: number of distinct LLMs that hallucinate the name identically.
 - Popularity asymmetry: ratio of popularity to nearest real package.
-- Code context: where the hallucinated name appeared (function name, import statement, doc string).
+- Code context: where the hallucinated name appeared *(per Spracklen's caveat below, extracted from the LLM's stated package list rather than from raw `import` statements, since module namespace ≠ package namespace)*.
 - Registry context: nearest real package age, maintainer count, download volume (via deps.dev or libraries.io).
+
+### 4.5.1 Hallucinated Name Extraction (per Spracklen caveat)
+
+Spracklen et al. (2025) explicitly warn that *"simply parsing the code for 'import' or 'require' is not useful, as the arguments in those statements refer to modules and not packages."* Module namespace is not protected and lacks 1:1 mapping to package names. Following Spracklen's methodology:
+
+1. **Primary extraction:** query the LLM post-generation for its stated package dependencies (e.g., "What packages are required to run this code?").
+2. **Cross-validation:** map stated packages to actual `import`/`require` statements in the generated code where possible; flag mismatches as a separate feature.
+3. **Install-command extraction:** capture any explicit `pip install` or `npm install` commands in the generated output as a tertiary source.
+
+This three-step procedure resolves the module/package discrepancy and produces a clean hallucinated-name dataset suitable for downstream feature engineering.
 
 ### 4.6 Classifier Training
 - Task: predict whether a hallucinated name will evade registry defenses.
-- Models: logistic regression (baseline), small Transformer (Andriushchenko 2026 methodology), random forest (interpretable baseline).
+- Models: logistic regression (baseline), small Transformer (Andriushchenko 2026 methodology, building on Shelmanov et al. 2025 uncertainty heads), random forest (interpretable baseline).
 - Train/test split: 70/30 stratified by registry.
 - Metrics: precision, recall, F1, ROC-AUC; per-registry breakdown.
-- Ablation: drop each feature group to identify signal sources.
+- Ablation: drop each feature group to identify signal sources. *(Hypothesis: lexical-distance group will be weakest per Spracklen's finding; semantic-confusion and model-consensus groups will dominate.)*
 
 ### 4.7 Confusion Taxonomy Mapping
 Cross-reference each hallucinated name to Neupane et al. (2023) 13 package-confusion categories. Quantify which categories correlate with defense evasion.
