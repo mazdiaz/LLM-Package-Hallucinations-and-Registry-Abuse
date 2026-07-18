@@ -88,9 +88,9 @@ The peer-reviewed literature on LLM package hallucination is **extremely sparse*
 
 1. **Spracklen et al. 2025 (USENIX Security)** — foundational; methodology scaffolding. Code: github.com/Spracks/PackageHallucination (MIT).
 2. **Neupane et al. 2023 (USENIX Security)** — "Beyond Typosquatting": 13 confusion categories, 360k npm confusion instances. Direct conceptual bridge to slopsquatting. Used in RQ4.
-3. **Andriushchenko et al. 2026 (ACL Findings)** — lightweight Transformer detector for code hallucinations. Methodology precedent for RQ3 classifier. Builds on Shelmanov et al. (EMNLP 2025) uncertainty heads — also in `refs.bib`.
-4. **Shelmanov et al. 2025 (EMNLP)** — pre-trained uncertainty quantification heads. Foundational methodology the RQ3 classifier adapts.
-5. **Neupane et al. 2023 (USENIX Security)** — "Beyond Typosquatting": 13 confusion categories, 360k npm confusion instances. Direct conceptual bridge to slopsquatting. Used in RQ4.
+3. **Andriushchenko et al. 2026 (ACL Findings)** — lightweight Transformer detector for code hallucinations. Related-work context only — NOT methodologically transferable to RQ3 classifier (requires white-box LLM access; predicts code correctness, not registry-policy evasion). RQ3 uses standard tabular ML on external features.
+4. **Shelmanov et al. 2025 (EMNLP)** — pre-trained uncertainty quantification heads. Related context for Andriushchenko; not used directly.
+5. **Neupane et al. 2023 (USENIX Security)** — "Beyond Typosquatting": 13 confusion categories, 360k npm confusion instances. Direct conceptual bridge to slopsquatting. **Primary signal for RQ4 and the RQ3 classifier's semantic feature.**
 6. **Taylor et al. 2020 (NSS)** — anti-typosquatting defense baseline.
 7. **Ladisa et al. 2023 (IEEE S&P)** — SoK supply chain taxonomy; framing.
 
@@ -157,7 +157,7 @@ LLM-Package-Hallucinations-and-Registry-Abuse/
 - **Always verify DOIs** before suggesting new peer-reviewed papers. Use CrossRef: `https://api.crossref.org/works/{DOI}`.
 - **If proposing new direction**, ensure it differentiates from Spracklen et al. (USENIX Security 2025) — that paper dominates the field.
 - **Methodology is largely transferable** from Spracklen's open-source MIT-licensed code.
-- **Classifier component** should follow Andriushchenko 2026 precedent (lightweight Transformer on LLM internal representations).
+- **Classifier component** uses standard tabular ML (logistic regression, random forest, gradient-boosted trees) on engineered features. Andriushchenko 2026 Transformer is related work only — NOT transferable (requires white-box LLM access).
 - **Confusion taxonomy** for RQ4 comes from Neupane et al. 2023 (13 categories).
 - **Ethics are non-negotiable:** zero package registration, coordinated disclosure.
 

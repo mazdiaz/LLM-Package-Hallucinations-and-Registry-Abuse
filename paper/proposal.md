@@ -37,7 +37,7 @@ Duan et al. (NDSS 2021, MALOSS) — 339 new malicious packages found. Scalco et 
 Pearce et al. (IEEE S&P 2022) — Copilot emits insecure code. Sandoval et al. (USENIX Security 2023) — user study, AI assistant security. Perry et al. (CCS 2023) — users write more insecure code with AI. Tony et al. (TOSEM 2025) — prompting for secure code. Fu et al. (TOSEM 2025) — Copilot weaknesses in GitHub. Mastropaolo et al. (ICSE 2023) — Copilot prompt robustness.
 
 ### 2.7 Code Hallucination Detection
-**Andriushchenko et al. (ACL Findings 2026)** — lightweight Transformer detector for code hallucinations using internal LLM representations. Closest peer-reviewed precedent for this proposal's classifier component. Builds on **Shelmanov et al. (EMNLP 2025)** pre-trained uncertainty quantification heads, which is the foundational methodology the RQ3 classifier adapts. **Tian et al. (AAAI 2025)** "CodeHalu" provides execution-based verification benchmark for code hallucinations.
+**Andriushchenko et al. (ACL Findings 2026)** — lightweight Transformer detector for code hallucinations using internal LLM representations. Important related-work context for the broader field. **Not methodologically transferable to this proposal** (see Section 4.6 note): requires white-box LLM access unavailable for commercial APIs, and predicts code correctness rather than registry-policy evasion. Builds on **Shelmanov et al. (EMNLP 2025)** pre-trained uncertainty quantification heads. **Tian et al. (AAAI 2025)** "CodeHalu" provides execution-based verification benchmark for code hallucinations.
 
 ### 2.8 Software Composition Analysis & SBOM
 Dann et al. (TSE 2022) — OSS vulnerability scanner challenges. Zhao et al. (ESEC/FSE 2023) — SCA for Java. Alfadel et al. (TOSEM 2023) — npm discoverability. Imtiaz et al. (TSE 2023) — security releases. Zahan et al. (ICSE-SEIP 2022) — weak links in npm supply chain.
@@ -108,10 +108,12 @@ This three-step procedure resolves the module/package discrepancy and produces a
 
 ### 4.6 Classifier Training
 - Task: predict whether a hallucinated name will evade registry defenses.
-- Models: logistic regression (baseline), small Transformer (Andriushchenko 2026 methodology, building on Shelmanov et al. 2025 uncertainty heads), random forest (interpretable baseline).
+- Models: **tabular classifiers only** — logistic regression ( interpretable baseline), random forest (interpretable non-linear baseline), gradient-boosted trees (XGBoost/LightGBM, strongest tabular baseline). All operate on the engineered feature set in Section 4.5.
+- **Note on Andriushchenko 2026:** While Andriushchenko's Transformer-based detector is excellent related-work context for code hallucination detection (Cluster 8), its methodology is **not transferable to this proposal** because (a) it requires white-box access to LLM internal representations (hidden states, attention weights) which is unavailable for the commercial APIs used here, and (b) it predicts code-generation correctness, not registry-policy evasion. The classifier component of this proposal operates entirely on external tabular features (lexical metrics, popularity, taxonomy) and therefore uses standard tabular ML rather than internal-representation Transformers.
 - Train/test split: 70/30 stratified by registry.
 - Metrics: precision, recall, F1, ROC-AUC; per-registry breakdown.
 - Ablation: drop each feature group to identify signal sources. *(Hypothesis: lexical-distance group will be weakest per Spracklen's finding; semantic-confusion and model-consensus groups will dominate.)*
+- Interpretability: SHAP values on best-performing model to surface which features drive evasion predictions (actionable for registry operators).
 
 ### 4.7 Confusion Taxonomy Mapping
 Cross-reference each hallucinated name to Neupane et al. (2023) 13 package-confusion categories. Quantify which categories correlate with defense evasion.
@@ -144,7 +146,7 @@ TBD — pilot.
 
 1. **Empirical:** First peer-reviewed measurement of PyPI/npm defense catch rates against hallucination-driven registrations.
 2. **Methodological:** Reproducible pipeline for testing registry defenses against LLM-generated package names.
-3. **Practical:** Lightweight classifier that registry operators can use as a pre-registration early-warning signal.
+3. **Practical:** Lightweight tabular classifier (logistic regression / random forest / gradient-boosted trees) that registry operators can use as a pre-registration early-warning signal.
 4. **Taxonomic:** Mapping of hallucinated names to Neupane's package-confusion categories, showing which attack patterns dominate.
 
 ### 7.1 Novelty Statement
