@@ -1,184 +1,199 @@
 # Literature Review: LLM Package Hallucinations & Slopsquatting
 
 **Last updated:** 2026-07-18
-**Status:** Peer-reviewed only (18 sources in `refs.bib`). arXiv preprints held in `refs_arxiv_pending.bib` pending advisor approval. Blogs/whitepapers logged in `non_citable_context.md`.
+**Status:** Peer-reviewed only (37 sources in `refs.bib`). arXiv preprints held in `refs_arxiv_pending.bib` pending advisor approval. Blogs/whitepapers logged in `non_citable_context.md`.
 
 ## Methodology
 
 Sources cross-checked via:
 - CrossRef DOI resolution (every DOI returns expected title)
-- USENIX / IEEE / ACM proceedings pages
-- arXiv ID verification (live fetch)
-- Wikipedia slopsquatting entry (used as pointer only — not cited)
+- USENIX / IEEE / ACM / Springer / ACL proceedings pages
+- arXiv ID verification (held separately, not cited here)
 
 ---
 
 ## Cluster 1 — Package Hallucination (Core)
 
-Only **one** peer-reviewed paper directly studies package hallucination by LLMs at scale.
+**Only ONE peer-reviewed paper directly studies LLM package hallucination.**
 
 ### Spracklen et al. — USENIX Security 2025 ★ SEMINAL
 - **Title:** "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs"
 - **Affiliations:** UT San Antonio, Virginia Tech
 - **Method:** 16 LLMs × 2 prompt datasets × Python+JS → 576,000 samples
-- **Findings:** 19.7% avg hallucination (5.2% commercial, 21.7% open-source); 205,474 unique names; CodeLlama 7B/34B >33%
-- **Mitigations evaluated:** RAG, self-detection, fine-tuning (fine-tuning = largest reduction)
-- **Coverage:** RQ1 (Python/JS), RQ4 (mitigation)
+- **Findings:** 19.7% avg hallucination (5.2% commercial, 21.7% open-source); 205,474 unique names
+- **Mitigations:** RAG, self-detection, fine-tuning (fine-tuning = largest reduction)
 
-**Implication:** Only one peer-reviewed paper exists on this exact topic. Field is wide open for follow-up work. Replication on 2026 frontier models and other ecosystems is publishable.
-
----
-
-## Cluster 2 — Software Supply Chain Attack Taxonomies & Ecosystems
-
-### Zimmermann et al. — USENIX Security 2019
-"Small World with High Risks" — npm dependency/maintainer graph; blast-radius analysis.
-
-### Oh et al. — DIMVA 2020
-"Backstabber's Knife Collection" — Review of OSS supply chain attacks; dataset of malicious packages.
-
-### Ladisa et al. — IEEE S&P 2023 (SoK)
-"Taxonomy of Attacks on Open-Source Software Supply Chains" — 107 attack vectors, 94 incidents, 33 safeguards. Industry-standard reference for situating slopsquatting.
+**Implication:** Only ONE peer-reviewed paper on this exact topic. Field wide open.
 
 ---
 
-## Cluster 3 — Typosquatting / Combosquatting / Source-Package Discrepancy
+## Cluster 2 — Supply Chain Attack Taxonomies & Ecosystems
 
-### Vu et al. — IEEE EuroS&PW 2020
-"Typosquatting and Combosquatting Attacks on the Python Ecosystem" — Pre-LLM slopsquatting predecessor. Direct lineage.
+- **Zimmermann et al. — USENIX Security 2019.** npm dependency graph, blast radius.
+- **Oh et al. — DIMVA 2020.** "Backstabber's Knife Collection." Review of OSS supply chain attacks.
+- **Ladisa et al. — IEEE S&P 2023.** SoK: 107 attack vectors, 94 incidents, 33 safeguards.
 
-### Vu et al. — ESEC/FSE 2021 (LastPyMile)
-Identifies discrepancy between published package and its source repo. Defense primitive useful for RQ4 framing.
+---
+
+## Cluster 3 — Typosquatting & Source-Package Discrepancy
+
+- **Vu et al. — EuroS&PW 2020.** PyPI typosquatting/combosquatting.
+- **Vu et al. — ESEC/FSE 2021.** LastPyMile: source-package discrepancy.
 
 ---
 
 ## Cluster 4 — Malicious Package Detection (Defenses)
 
-### Duan et al. — NDSS 2021 (MALOSS)
-Multi-signal framework; 339 new malicious packages discovered, 278 removed.
-
-### Scalco et al. — ARES 2022
-npm injection detection.
-
-### Ladisa et al. — SCORED@CCS 2022
-Malicious Java package detection.
-
-### Ladisa et al. — SCORED@CCS 2023 (Hitchhiker's Guide)
-Malicious third-party dependencies; multi-ecosystem.
-
-### Ladisa et al. — ACSAC 2023
-Cross-language malicious package detection (npm + PyPI); 58 new malicious packages removed.
-
-### Huang et al. — USENIX Security 2024 (DONAPI)
-Behavior-sequence knowledge mapping for npm malicious package detection.
-
-### Liu et al. — ASE 2024
-"Towards Robust Detection of OSS Supply Chain Poisoning Attacks in Industry Environments."
-
-### SpiderScan — ASE 2024
-Graph-based behavior modeling for npm malicious package detection.
-
-### Gao et al. — USENIX Security 2025 (MalGuard)
-Real-time malicious package detection; 113 new malicious packages found.
-
-### Guo et al. — USENIX Security 2026 (PyGuard)
-Knowledge-mining framework for PyPI; 219 new malicious packages found.
-
-**Implication:** Malicious-package DETECTION is well-studied. Pre-INSTALL defense against hallucinated names specifically is NOT.
+- **Duan et al. — NDSS 2021 (MALOSS).** 339 malicious packages, 278 removed.
+- **Scalco et al. — ARES 2022.** npm injection detection.
+- **Ladisa et al. — SCORED@CCS 2022.** Malicious Java packages.
+- **Ladisa et al. — SCORED@CCS 2023.** Hitchhiker's Guide: malicious third-party dependencies.
+- **Ladisa et al. — ACSAC 2023.** Cross-language detection (npm + PyPI).
+- **Huang et al. — USENIX Security 2024 (DONAPI).** npm behavior-sequence mapping.
+- **Liu et al. — ASE 2024.** Robust detection in industry environments.
+- **SpiderScan — ASE 2024.** Graph-based behavior modeling.
+- **Gao et al. — USENIX Security 2025 (MalGuard).** Real-time detection; 113 new malicious.
+- **Guo et al. — USENIX Security 2026 (PyGuard).** PyPI knowledge-mining; 219 new malicious.
 
 ---
 
 ## Cluster 5 — Dependency Network Empirical Studies
 
-### Zerouali et al. — Empirical Software Engineering (journal) 2022
-Security vulnerability impact in npm and RubyGems dependency networks.
+- **Zerouali et al. — EMSE 2022.** Security vuln impact in npm/RubyGems dependency networks.
 
 ---
 
-## Cluster 6 — Governance / Adjacent
+## Cluster 6 — Governance
 
-### Oh et al. — IJAIBDCMS 2026
-Governing AI-Generated Code in PCI-DSS Compliant CI/CD Pipelines.
+- **Oh et al. — IJAIBDCMS 2026.** PCI-DSS compliant CI/CD pipelines.
 
 ---
 
-## Gaps Identified (research opportunities)
+## Cluster 7 — AI Code Assistant Security ★ NEW
 
-After 18 peer-reviewed sources reviewed:
+Establishes that LLM code assistants emit insecure code; methodology transferable to package hallucination.
+
+- **Pearce et al. — IEEE S&P 2022.** "Asleep at the Keyboard." Copilot emits insecure code under security-relevant prompts. Methodology directly applicable: replace "insecure code" with "hallucinated package".
+- **Sandoval et al. — USENIX Security 2023.** "Lost at C." User study: AI-assisted users introduced security bugs at similar rate to control; human-in-the-loop acceptance matters.
+- **Perry et al. — CCS 2023.** "Do Users Write More Insecure Code with AI Assistants?" User study confirming AI assistants increase security failures.
+- **Tony et al. — TOSEM 2025.** Systematic prompting techniques for secure code generation. RQ4 mitigation angle.
+- **Fu et al. — TOSEM 2025.** Empirical study of Copilot code in real GitHub projects. Ecological validity.
+- **Mastropaolo et al. — ICSE 2023.** Robustness of Copilot under prompt perturbations.
+
+---
+
+## Cluster 8 — Code Hallucination Detection (peer-reviewed) ★ NEW
+
+- **Andriushchenko et al. — ACL Findings 2026.** ★ DIRECT RQ4 RELEVANCE.
+  - "Efficient Hallucination Detection in Automatic Code Generation"
+  - Trains lightweight Transformer detector on LLM internal representations
+  - Releases first line-level code-hallucination dataset (Collu-Bench derived)
+  - Code: github.com/datapaf/CodeHallucinationDetection
+  - Closest peer-reviewed precedent for hallucination classifier (RQ4)
+
+---
+
+## Cluster 9 — Package Confusion & Install-Time Defenses ★ NEW (critical for Pivot D)
+
+- **Neupane et al. — USENIX Security 2023.** ★ DIRECT BRIDGE TO SLOPSQUATTING.
+  - "Beyond Typosquatting: An In-depth Look at Package Confusion"
+  - 13 package-confusion categories from 1,232 historical attacks
+  - 360,333 potential confusion instances in npm
+  - Broadens threat model beyond typosquatting — slopsquatting fits this exact space
+- **Taylor et al. — NSS 2020 (Springer LNCS).** Defending against package typosquatting. Pre-install warnings baseline.
+- **Ferreira et al. — ICSE 2021.** Lightweight permission system for npm; covers 31.9% of packages at ~1% overhead.
+- **Wyss et al. — AsiaCCS 2022.** "Wolf at the Door." Latch: install-time attack mediation.
+- **Wyss et al. — ICSE 2022.** "What the Fork?" Hidden code clones in npm.
+
+---
+
+## Cluster 10 — Software Composition Analysis & Empirical Studies ★ NEW
+
+- **Dann et al. — TSE 2022.** OSS vulnerability scanner challenges; 616-case test suite.
+- **Zhao et al. — ESEC/FSE 2023.** SCA for Java vulnerability detection.
+- **Alfadel et al. — TOSEM 2023.** npm vulnerability discoverability in Node.js.
+- **Imtiaz et al. — TSE 2023.** Security releases of OSS packages; temporal exposure windows.
+
+---
+
+## Cluster 11 — SBOM, CI/CD, Supply Chain Integrity ★ NEW
+
+- **Xia et al. — ICSE 2023.** SBOM empirical study; adoption barriers.
+- **Koishybayev et al. — USENIX Security 2022.** GitHub CI workflow security; 18% repos use vulnerable actions.
+- **Torres-Arias et al. — USENIX Security 2019.** in-toto: cryptographic supply-chain metadata; would prevent 83-100% of historical attacks.
+
+---
+
+## Gaps Identified (revised after 37 peer-reviewed sources)
 
 | Gap | Status | Notes |
 |-----|--------|-------|
-| 1. **Replication of Spracklen on 2026 frontier models** | **OPEN in peer-reviewed literature** | Churilov preprint exists but not peer-reviewed |
-| 2. **Ecosystems beyond Python/JS** | **OPEN in peer-reviewed literature** | Preprints exist for Rust (Krishna) and Go (Haque) but unpublished |
-| 3. **Registry defense benchmark (RQ3)** | **WIDE OPEN** | No peer-reviewed study measures whether PyPI/npm anti-abuse controls catch hallucination-driven registrations |
-| 4. **Agentic / MCP tool hallucination** | **OPEN** | No peer-reviewed study |
-| 5. **Long-context / multi-turn effects** | **OPEN** | Not studied |
-| 6. **Adversarial fine-tuning / poisoning** | **OPEN** | Not studied |
-| 7. **IDE-specific codegen paths** (Copilot, Cursor) | **OPEN** | Not studied directly |
-| 8. **Cross-lingual transfer of hallucinations** | **OPEN** | Not studied |
-| 9. **Real-world attack telemetry** | **OPEN** | No confirmed in-the-wild attack (per Wikipedia Jul 2026) |
+| 1. Replication of Spracklen on 2026 frontier models | OPEN in peer-reviewed literature | Churilov preprint exists, unpublished |
+| 2. Ecosystems beyond Python/JS | OPEN in peer-reviewed literature | Krishna (Rust) and Haque (Go) are preprints |
+| 3. **Registry defense benchmark (RQ3)** | **WIDE OPEN** | No peer-reviewed study measures PyPI/npm defense catch rates against hallucination-driven names |
+| 4. Agentic / MCP tool hallucination | **OPEN** | No peer-reviewed study |
+| 5. Long-context / multi-turn effects | OPEN | Not studied |
+| 6. Adversarial fine-tuning / poisoning | OPEN | Not studied |
+| 7. IDE-specific codegen paths | OPEN | Pearce/Sandoval/Perry study Copilot generally, not hallucination |
+| 8. Cross-lingual transfer of hallucinations | OPEN | Not studied |
+| 9. Real-world attack telemetry | OPEN | No confirmed in-the-wild attack (Wikipedia Jul 2026) |
+| 10. **Lightweight package-name hallucination classifier** | PARTIAL | Andriushchenko (2026) does general code hallucination detection; package-specific version missing |
 
 ---
 
 ## Revised Pivots (for 2-month proposal)
 
 ### ~~Pivot A — Ecosystem Expansion~~ [WEAKENED]
-Preprints (Krishna=Rust, Haque=Go) exist; if those get peer-reviewed before yours, you're scooped. Risky.
+Krishna (Rust) + Haque (Go) preprints exist; scoop risk.
 
 ### Pivot B — Agentic / MCP Hallucination [HIGH NOVELTY]
-Hallucinations in agent tool calls (MCP servers, LangChain tools, function-calling schema). No peer-reviewed prior work.
-- **Pros:** Hot topic, fully open in peer-reviewed literature
-- **Cons:** Must construct ground-truth tool registry
+- **Pros:** No peer-reviewed prior work
+- **Cons:** Ground-truth construction required
 
 ### Pivot C — Adversarial Fine-Tuning Attack [VERY HIGH NOVELTY]
-Attacker fine-tunes model or poisons data to steer hallucinations to owned names.
 - **Pros:** Novel threat model
-- **Cons:** Needs GPU; full study >2 months
+- **Cons:** GPU-bound; full study >2 months
 
 ### Pivot D — Registry Defense Benchmark [STRONGEST GAP, RECOMMENDED]
-Systematically test whether PyPI/npm anti-abuse controls catch hallucination-driven registrations.
-- **Method:** Use Spracklen/Churilov methodology to generate hallucinated names from current frontier models; ethically simulate each registry's defense rules; measure pass/block rates; build classifier predicting evasion.
-- **Pros:** Clearest peer-reviewed gap; reproducible; no package registration needed (fully ethical); 2-mo feasible
-- **Cons:** Less novel than Pivot B/C
+**Method:**
+1. Replicate Spracklen prompt setup on 5-10 current frontier models (Claude Sonnet 4.x, GPT-5.x, Gemini 2.5, DeepSeek V3, Llama 4, Mistral) across Python/JS
+2. Extract hallucinated package names
+3. Check registerability (read-only — no actual registration)
+4. **For each hallucinated name:** apply each registry's anti-abuse policy (PyPI confusable-name rejection, quarantine criteria; npm first-come rules) → predict pass/block
+5. Cross-reference Neupane (2023) package-confusion taxonomy to classify hallucinated-name categories
+6. Train classifier predicting "evades defenses" using features: name length, lexical similarity to popular packages, popularity asymmetry, model-consensus rate
+7. Validate classifier on held-out hallucinated names
+
+**Key support from new literature:**
+- **Neupane 2023** provides package-confusion taxonomy to situate slopsquatting within
+- **Andriushchenko 2026** provides methodology for hallucination detector
+- **Taylor 2020** provides baseline anti-typosquatting defense formulation
+- **Ferreira 2021 / Wyss 2022** provide defense layers to compare against
+- **Koishybayev 2022** motivates CI/CD integration angle
+
+**Pros:** Clearest peer-reviewed gap; strong methodology scaffolding from existing work; 2-mo feasible
+**Cons:** Less novel than Pivot B/C
 
 ### Pivot E — Prompt-Variation Robustness
-Systematic perturbation across models × registries. Twist preprint exists but not peer-reviewed; could be first peer-reviewed.
+Mastropaolo (2023) and Tony (2025) touch this; less novel than thought.
 
 ---
 
-## Top Recommendation
+## Top Recommendation: **Pivot D**
 
-**Pivot D (Registry Defense Benchmark).** Reasons:
-- Clearest peer-reviewed gap (Cluster 4 detection papers don't cover pre-install name validation against hallucinations)
-- Only one peer-reviewed paper (Spracklen) exists on core topic — strong differentiation possible
-- Builds on Spracklen methodology (code public, MIT licensed)
-- No package registration → fully ethical
-- 2-mo timeline realistic for proposal + preliminary results
-- Strong security venue appeal (NDSS/CCS/USENIX shape)
-
-**Backup:** Pivot B (MCP/agentic) if ground-truth registry can be constructed in week 1.
-
----
-
-## Pending — Awaiting Advisor Decision on arXiv Policy
-
-If advisor approves arXiv preprints, incorporate from `refs_arxiv_pending.bib`:
-- Churilov 2026 (replication on frontier models)
-- Krishna 2025 (Rust)
-- Haque 2025 (Go, quantization)
-- Twist 2025 (prompt variation)
-- Eghbali 2024 De-Hallucinator, Chen 2025 MARIN, Miranda-Pena 2026, Khati 2026 (mitigation cluster)
-- Skill-recommendation study (arXiv:2607.12340)
-
-Adding these would strengthen related work and re-close some "gaps" above, further narrowing toward Pivot D as the clearest opening.
+Reasons unchanged but strengthened:
+- 37 peer-reviewed sources now confirm RQ3 is wide open
+- Neupane (2023) gives the conceptual bridge (package confusion taxonomy)
+- Andriushchenko (2026) gives methodology precedent for the classifier
+- Strong differentiation from Spracklen/Churilov
 
 ---
 
 ## Next Actions
 
-1. **Confirm arXiv policy with advisor**
-2. **Read Spracklen PDF in full** (only peer-reviewed core paper)
-3. **Read Ladisa SoK (IEEE S&P 2023)** for supply-chain framing
-4. **Read Vu EuroS&PW 2020** for typosquatting defense precedent
-5. **Pick pivot (D or B)** by end of day
-6. **Update `proposal.md`** with chosen pivot's RQs
+1. **Confirm arXiv policy** with advisor → unlocks 10 more sources
+2. **Read Spracklen PDF in full** (Cluster 1 seminal)
+3. **Read Neupane 2023 PDF** (Cluster 9 — direct conceptual bridge)
+4. **Read Andriushchenko 2026 PDF** (Cluster 8 — RQ4 methodology)
+5. **Lock pivot** (D recommended)
+6. **Update `proposal.md`** with chosen pivot's RQs + methodology sketch
