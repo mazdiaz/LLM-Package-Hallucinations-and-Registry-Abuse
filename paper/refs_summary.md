@@ -58,23 +58,23 @@
 
 ## Cluster 5 — Dependency Network Empirical Studies
 
-17. **Zerouali, A., Mens, T., Constantinou, E., & De Roover, C. (2022).** *On the impact of security vulnerabilities in the npm and RubyGems dependency networks.* In **Empirical Software Engineering (EMSE)**, vol. 27(6). Springer. DOI: 10.1007/s10664-022-10154-1
+18. **Zerouali, A., Mens, T., Constantinou, E., & De Roover, C. (2022).** *On the impact of security vulnerabilities in the npm and RubyGems dependency networks.* In **Empirical Software Engineering (EMSE)**, vol. 27(6). Springer. DOI: 10.1007/s10664-022-10154-1
 
 ---
 
 ## Cluster 6 — AI Code Assistant Security
 
-18. **Pearce, H., Ahmad, B., Tan, B., Dolan-Gavitt, B., & Karri, R. (2022).** *Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions.* In **2022 IEEE Symposium on Security and Privacy (SP)**, pp. 754–768. DOI: 10.1109/SP46214.2022.9833571
+19. **Pearce, H., Ahmad, B., Tan, B., Dolan-Gavitt, B., & Karri, R. (2022).** *Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions.* In **2022 IEEE Symposium on Security and Privacy (SP)**, pp. 754–768. DOI: 10.1109/SP46214.2022.9833571
 
-19. **Sandoval, G., Pearce, H., Nys, T., Karri, R., Garg, S., & Dolan-Gavitt, B. (2023).** *Lost at C: A User Study on the Security Implications of Large Language Model Code Assistants.* In **32nd USENIX Security Symposium (USENIX Security 23)**, pp. 2205–2222.
+20. **Sandoval, G., Pearce, H., Nys, T., Karri, R., Garg, S., & Dolan-Gavitt, B. (2023).** *Lost at C: A User Study on the Security Implications of Large Language Model Code Assistants.* In **32nd USENIX Security Symposium (USENIX Security 23)**, pp. 2205–2222.
 
-20. **Perry, N., Srivastava, M., Kumar, D., & Boneh, D. (2023).** *Do Users Write More Insecure Code with AI Assistants?* In **Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security (CCS)**. ACM. DOI: 10.1145/3576915.3623157
+21. **Perry, N., Srivastava, M., Kumar, D., & Boneh, D. (2023).** *Do Users Write More Insecure Code with AI Assistants?* In **Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security (CCS)**. ACM. DOI: 10.1145/3576915.3623157
 
-21. **Tony, C., Díaz Ferreyra, N. E., Mutas, M., Dhiff, S., & Scandariato, R. (2025).** *Prompting Techniques for Secure Code Generation: A Systematic Investigation.* **ACM Transactions on Software Engineering and Methodology (TOSEM).** DOI: 10.1145/3722108
+22. **Tony, C., Díaz Ferreyra, N. E., Mutas, M., Dhiff, S., & Scandariato, R. (2025).** *Prompting Techniques for Secure Code Generation: A Systematic Investigation.* **ACM Transactions on Software Engineering and Methodology (TOSEM).** DOI: 10.1145/3722108
 
-22. **Fu, Y., Liang, P., Tahir, A., Li, Z., Shahin, M., Yu, J., & Chen, J. (2025).** *Security Weaknesses of Copilot-Generated Code in GitHub Projects: An Empirical Study.* **ACM Transactions on Software Engineering and Methodology (TOSEM).** DOI: 10.1145/3716848
+23. **Fu, Y., Liang, P., Tahir, A., Li, Z., Shahin, M., Yu, J., & Chen, J. (2025).** *Security Weaknesses of Copilot-Generated Code in GitHub Projects: An Empirical Study.* **ACM Transactions on Software Engineering and Methodology (TOSEM).** DOI: 10.1145/3716848
 
-23. **Mastropaolo, A., Pascarella, L., Guglielmi, E., Ciniselli, M., Scalabrino, S., Oliveto, R., & Bavota, G. (2023).** *On the Robustness of Code Generation Techniques: An Empirical Study on GitHub Copilot.* In **2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)**, pp. 2155–2167. DOI: 10.1109/ICSE48619.2023.00181
+24. **Mastropaolo, A., Pascarella, L., Guglielmi, E., Ciniselli, M., Scalabrino, S., Oliveto, R., & Bavota, G. (2023).** *On the Robustness of Code Generation Techniques: An Empirical Study on GitHub Copilot.* In **2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)**, pp. 2155–2167. DOI: 10.1109/ICSE48619.2023.00181
 
 ---
 
@@ -90,34 +90,36 @@
 
 ## Cluster 8 — Package Confusion & Install-Time Defenses
 
-25. **Neupane, S., Holmes, G., Wyss, E., Davidson, D., & De Carli, L. (2023).** *Beyond Typosquatting: An In-depth Look at Package Confusion.* In **32nd USENIX Security Symposium (USENIX Security 23)**, pp. 3439–3456.
+28. **Neupane, S., Holmes, G., Wyss, E., Davidson, D., & De Carli, L. (2023).** *Beyond Typosquatting: An In-depth Look at Package Confusion.* In **32nd USENIX Security Symposium (USENIX Security 23)**, pp. 3439–3456.
 
-26. **Taylor, M., Vaidya, R. K., Davidson, D., De Carli, L., & Rastogi, V. (2020).** *Defending Against Package Typosquatting.* In **Network and System Security (NSS)**, LNCS vol. 12570, pp. 112–131. Springer. DOI: 10.1007/978-3-030-65745-1_7
+29. **Taylor, M., Vaidya, R. K., Davidson, D., De Carli, L., & Rastogi, V. (2020).** *Defending Against Package Typosquatting.* In **Network and System Security (NSS)**, LNCS vol. 12570, pp. 112–131. Springer. DOI: 10.1007/978-3-030-65745-1_7
 
-27. **Ferreira, G., Jia, L., Sunshine, J., & Kästner, C. (2021).** *Containing Malicious Package Updates in npm with a Lightweight Permission System.* In **2021 IEEE/ACM 43rd International Conference on Software Engineering (ICSE)**, pp. 1334–1346. DOI: 10.1109/ICSE43902.2021.00121
+30. **Ferreira, G., Jia, L., Sunshine, J., & Kästner, C. (2021).** *Containing Malicious Package Updates in npm with a Lightweight Permission System.* In **2021 IEEE/ACM 43rd International Conference on Software Engineering (ICSE)**, pp. 1334–1346. DOI: 10.1109/ICSE43902.2021.00121
 
-28. **Wyss, E., Wittman, A., Davidson, D., & De Carli, L. (2022).** *Wolf at the Door: Preventing Install-Time Attacks in npm with Latch.* In **Proceedings of the 2022 ACM Asia Conference on Computer and Communications Security (AsiaCCS)**, pp. 1139–1153. DOI: 10.1145/3488932.3523262
+31. **Wyss, E., Wittman, A., Davidson, D., & De Carli, L. (2022).** *Wolf at the Door: Preventing Install-Time Attacks in npm with Latch.* In **Proceedings of the 2022 ACM Asia Conference on Computer and Communications Security (AsiaCCS)**, pp. 1139–1153. DOI: 10.1145/3488932.3523262
 
-29. **Wyss, E., De Carli, L., & Davidson, D. (2022).** *What the Fork? Finding Hidden Code Clones in npm.* In **Proceedings of the 44th International Conference on Software Engineering (ICSE)**. ACM. DOI: 10.1145/3510003.3510168
+32. **Wyss, E., De Carli, L., & Davidson, D. (2022).** *What the Fork? Finding Hidden Code Clones in npm.* In **Proceedings of the 44th International Conference on Software Engineering (ICSE)**. ACM. DOI: 10.1145/3510003.3510168
 
 ---
 
 ## Cluster 9 — Software Composition Analysis & Empirical Studies
 
-30. **Dann, A., Rajagopalan, S., Tümay, S., Gerking, C., Kästner, C., & Bodden, E. (2022).** *Identifying Challenges for OSS Vulnerability Scanners: A Study & Test Suite.* **IEEE Transactions on Software Engineering (TSE)**, 48(9), 3613–3625. DOI: 10.1109/TSE.2021.3101739
+33. **Dann, A., Rajagopalan, S., Tümay, S., Gerking, C., Kästner, C., & Bodden, E. (2022).** *Identifying Challenges for OSS Vulnerability Scanners: A Study & Test Suite.* **IEEE Transactions on Software Engineering (TSE)**, 48(9), 3613–3625. DOI: 10.1109/TSE.2021.3101739
 
-31. **Zhao, L., Chen, S., Xu, Z., Liu, C., Zhang, L., Wu, J., Sun, J., & Liu, Y. (2023).** *Software Composition Analysis for Vulnerability Detection: An Empirical Study on Java Projects.* In **Proceedings of the 31st ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE)**. ACM. DOI: 10.1145/3611643.3616299
+34. **Zhao, L., Chen, S., Xu, Z., Liu, C., Zhang, L., Wu, J., Sun, J., & Liu, Y. (2023).** *Software Composition Analysis for Vulnerability Detection: An Empirical Study on Java Projects.* In **Proceedings of the 31st ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE)**. ACM. DOI: 10.1145/3611643.3616299
 
-32. **Alfadel, M., Costa, D. E., & Shihab, E. (2023).** *On the Discoverability of npm Vulnerabilities in Node.js Projects.* **ACM Transactions on Software Engineering and Methodology (TOSEM).** DOI: 10.1145/3571848
+35. **Alfadel, M., Costa, D. E., & Shihab, E. (2023).** *On the Discoverability of npm Vulnerabilities in Node.js Projects.* **ACM Transactions on Software Engineering and Methodology (TOSEM).** DOI: 10.1145/3571848
 
-33. **Imtiaz, N., Morrison, P., Hilton, M., Rahman, M., & Williams, L. (2023).** *Open or Sneaky? Fast or Slow? Light or Heavy?: Investigating Security Releases of Open Source Packages.* **IEEE Transactions on Software Engineering (TSE).** DOI: 10.1109/TSE.2022.3181010
+36. **Imtiaz, N., Morrison, P., Hilton, M., Rahman, M., & Williams, L. (2023).** *Open or Sneaky? Fast or Slow? Light or Heavy?: Investigating Security Releases of Open Source Packages.* **IEEE Transactions on Software Engineering (TSE).** DOI: 10.1109/TSE.2022.3181010
+
+37. **Zahan, N., Zimmermann, T., Godefroid, P., Murphy, B., Maddila, C., & Murphy, G. C. (2022).** *What are Weak Links in the npm Supply Chain?* In **Proceedings of the 44th International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)**. ACM. DOI: 10.1145/3510457.3513044
 
 ---
 
 ## Cluster 10 — SBOM, CI/CD, Supply Chain Integrity
 
-34. **Xia, B., Bi, T., Xing, Z., Lu, Q., & Zhu, L. (2023).** *An Empirical Study on Software Bill of Materials: Where We Stand and the Road Ahead.* In **2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)**, pp. 2630–2642. DOI: 10.1109/ICSE48619.2023.00219
+38. **Xia, B., Bi, T., Xing, Z., Lu, Q., & Zhu, L. (2023).** *An Empirical Study on Software Bill of Materials: Where We Stand and the Road Ahead.* In **2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)**, pp. 2630–2642. DOI: 10.1109/ICSE48619.2023.00219
 
-35. **Koishybayev, I., Nahapetyan, A., Zachariah, R., Muralee, S., Reaves, B., Kapravelos, A., & Machiry, A. (2022).** *Characterizing the Security of Github CI Workflows.* In **31st USENIX Security Symposium (USENIX Security 22)**, pp. 2747–2763.
+39. **Koishybayev, I., Nahapetyan, A., Zachariah, R., Muralee, S., Reaves, B., Kapravelos, A., & Machiry, A. (2022).** *Characterizing the Security of Github CI Workflows.* In **31st USENIX Security Symposium (USENIX Security 22)**, pp. 2747–2763.
 
-36. **Torres-Arias, S., Afzali, H., Kuppusamy, T. K., Curtmola, R., & Cappos, J. (2019).** *in-toto: Providing farm-to-table guarantees for bits and bytes.* In **28th USENIX Security Symposium (USENIX Security 19)**, pp. 1393–1410.
+40. **Torres-Arias, S., Afzali, H., Kuppusamy, T. K., Curtmola, R., & Cappos, J. (2019).** *in-toto: Providing farm-to-table guarantees for bits and bytes.* In **28th USENIX Security Symposium (USENIX Security 19)**, pp. 1393–1410.
