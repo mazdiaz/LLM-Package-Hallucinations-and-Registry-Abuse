@@ -63,13 +63,7 @@ Sources cross-checked via:
 
 ---
 
-## Cluster 6 — Governance
-
-- **Oh et al. — IJAIBDCMS 2026.** PCI-DSS compliant CI/CD pipelines.
-
----
-
-## Cluster 7 — AI Code Assistant Security ★ NEW
+## Cluster 6 — AI Code Assistant Security ★ NEW
 
 Establishes that LLM code assistants emit insecure code; methodology transferable to package hallucination.
 
@@ -82,7 +76,7 @@ Establishes that LLM code assistants emit insecure code; methodology transferabl
 
 ---
 
-## Cluster 8 — Code Hallucination Detection (peer-reviewed) ★ NEW
+## Cluster 7 — Code Hallucination Detection (peer-reviewed) ★ NEW
 
 - **Andriushchenko et al. — ACL Findings 2026.** ★ DIRECT RQ4 RELEVANCE.
   - "Efficient Hallucination Detection in Automatic Code Generation"
@@ -93,7 +87,7 @@ Establishes that LLM code assistants emit insecure code; methodology transferabl
 
 ---
 
-## Cluster 9 — Package Confusion & Install-Time Defenses ★ NEW (critical for Pivot D)
+## Cluster 8 — Package Confusion & Install-Time Defenses ★ NEW (critical for Pivot D)
 
 - **Neupane et al. — USENIX Security 2023.** ★ DIRECT BRIDGE TO SLOPSQUATTING.
   - "Beyond Typosquatting: An In-depth Look at Package Confusion"
@@ -107,7 +101,7 @@ Establishes that LLM code assistants emit insecure code; methodology transferabl
 
 ---
 
-## Cluster 10 — Software Composition Analysis & Empirical Studies ★ NEW
+## Cluster 9 — Software Composition Analysis & Empirical Studies ★ NEW
 
 - **Dann et al. — TSE 2022.** OSS vulnerability scanner challenges; 616-case test suite.
 - **Zhao et al. — ESEC/FSE 2023.** SCA for Java vulnerability detection.
@@ -116,7 +110,7 @@ Establishes that LLM code assistants emit insecure code; methodology transferabl
 
 ---
 
-## Cluster 11 — SBOM, CI/CD, Supply Chain Integrity ★ NEW
+## Cluster 10 — SBOM, CI/CD, Supply Chain Integrity ★ NEW
 
 - **Xia et al. — ICSE 2023.** SBOM empirical study; adoption barriers.
 - **Koishybayev et al. — USENIX Security 2022.** GitHub CI workflow security; 18% repos use vulnerable actions.
@@ -124,7 +118,7 @@ Establishes that LLM code assistants emit insecure code; methodology transferabl
 
 ---
 
-## Gaps Identified (revised after 37 peer-reviewed sources)
+## Gaps Identified (revised after 40 peer-reviewed sources)
 
 | Gap | Status | Notes |
 |-----|--------|-------|
@@ -182,7 +176,7 @@ Mastropaolo (2023) and Tony (2025) touch this; less novel than thought.
 ## Top Recommendation: **Pivot D**
 
 Reasons unchanged but strengthened:
-- 37 peer-reviewed sources now confirm RQ3 is wide open
+- 40 peer-reviewed sources now confirm RQ3 is wide open
 - Neupane (2023) gives the conceptual bridge (package confusion taxonomy)
 - Andriushchenko (2026) gives methodology precedent for the classifier
 - Strong differentiation from Spracklen/Churilov

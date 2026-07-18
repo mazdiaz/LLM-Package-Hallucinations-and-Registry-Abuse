@@ -163,4 +163,4 @@ See `README.md` and Section 4.8.
 
 ## 10. References
 
-See `refs.bib` (37 peer-reviewed sources).
+See `refs.bib` (40 peer-reviewed sources).

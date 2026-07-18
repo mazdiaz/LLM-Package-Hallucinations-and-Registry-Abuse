@@ -103,7 +103,7 @@ LLM-Package-Hallucinations-and-Registry-Abuse/
 ├── README.md                          # Project overview + RQs + methodology
 ├── LICENSE                            # MIT
 ├── .gitignore
-├── refs.bib                           # 37 peer-reviewed citations (POLICY: peer-reviewed only)
+├── refs.bib                           # 40 peer-reviewed citations (POLICY: peer-reviewed only)
 ├── paper/
 │   ├── proposal.md                    # Full proposal draft (Pivot D locked)
 │   ├── lit_review.md                  # Annotated review with 11 clusters + gaps + pivots
