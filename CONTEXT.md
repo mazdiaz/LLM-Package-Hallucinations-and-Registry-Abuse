@@ -69,7 +69,7 @@ The peer-reviewed literature on LLM package hallucination is **extremely sparse*
 
 ---
 
-## 5. Literature Clusters (37 peer-reviewed sources in `refs.bib`)
+## 5. Literature Clusters (36 peer-reviewed sources in `refs.bib`)
 
 | Cluster | Count | Purpose |
 |---------|-------|---------|
@@ -78,12 +78,11 @@ The peer-reviewed literature on LLM package hallucination is **extremely sparse*
 | 3. Typosquatting & Source Discrepancy | 2 | Vu EuroS&PW 2020, Vu LastPyMile 2021 |
 | 4. Malicious Package Detection | 10 | Duan MALOSS, Ladisa×3, Huang DONAPI, Liu, SpiderScan, Gao MalGuard, Guo PyGuard, Scalco |
 | 5. Dependency Network Empirical | 1 | Zerouali EMSE 2022 |
-| 6. Governance | 1 | Oh IJAIBDCMS 2026 |
-| 7. AI Code Assistant Security | 6 | Pearce, Sandoval, Perry, Tony, Fu, Mastropaolo |
-| 8. Code Hallucination Detection | 1 | Andriushchenko ACL 2026 (RQ4 methodology precedent) |
-| 9. Package Confusion & Install-Time Defenses | 5 | Neupane (KEY), Taylor, Ferreira, Wyss×2 |
-| 10. SCA & Empirical Studies | 4 | Dann, Zhao, Alfadel, Imtiaz |
-| 11. SBOM / CI/CD / Integrity | 3 | Xia, Koishybayev, Torres-Arias (in-toto) |
+| 6. AI Code Assistant Security | 6 | Pearce, Sandoval, Perry, Tony, Fu, Mastropaolo |
+| 7. Code Hallucination Detection | 1 | Andriushchenko ACL 2026 (RQ4 methodology precedent) |
+| 8. Package Confusion & Install-Time Defenses | 5 | Neupane (KEY), Taylor, Ferreira, Wyss×2 |
+| 9. SCA & Empirical Studies | 4 | Dann, Zhao, Alfadel, Imtiaz |
+| 10. SBOM / CI/CD / Integrity | 3 | Xia, Koishybayev, Torres-Arias (in-toto) |
 
 ### Most Critical Sources for This Proposal
 
@@ -122,7 +121,7 @@ LLM-Package-Hallucinations-and-Registry-Abuse/
 
 **Done:**
 - Repository scaffolded and pushed to GitHub
-- 37 peer-reviewed sources verified and organized in `refs.bib` (every DOI/USENIX URL verified live)
+- 36 peer-reviewed sources verified and organized in `refs.bib` (every DOI/USENIX URL verified live)
 - Annotated literature review in `paper/lit_review.md`
 - Pivot D locked in `paper/proposal.md` with full methodology section
 - 8-week timeline drafted

@@ -45,10 +45,7 @@ Dann et al. (TSE 2022) — OSS vulnerability scanner challenges. Zhao et al. (ES
 ### 2.9 SBOM, CI/CD, Supply Chain Integrity
 Xia et al. (ICSE 2023) — SBOM empirical study. Koishybayev et al. (USENIX Security 2022) — GitHub CI workflow security. Torres-Arias et al. (USENIX Security 2019) — in-toto supply chain integrity.
 
-### 2.10 Governance
-Oh et al. (IJAIBDCMS 2026) — PCI-DSS compliant CI/CD pipelines.
-
-See `lit_review.md` for full annotated review with 37 peer-reviewed sources.
+See `lit_review.md` for full annotated review with 36 peer-reviewed sources.
 
 ## 3. Research Questions
 
