@@ -2,7 +2,9 @@
 
 **Author:** mazdiaz
 **Date:** TBD
-**Target venue:** TBD
+**Target venue:** TBD (USENIX Security / CCS / NDSS / EuroS&P shape)
+**Primary pivot:** D — Registry Defense Benchmark
+**Backup pivot:** B — Agentic / MCP Hallucination (if D rejected)
 
 ## Abstract
 
@@ -10,44 +12,108 @@ TBD — 150 words once pilot complete.
 
 ## 1. Introduction
 
-- Software supply chain attacks context
-- Rise of code-generating LLMs in developer workflows
-- Package hallucination phenomenon
-- Contributions of this work
+LLM code generators routinely emit references to software packages that do not exist in real registries — a phenomenon called *package hallucination* (Spracklen et al., USENIX Security 2025). Attackers can register these hallucinated names with malicious code, an attack pattern known as *slopsquatting* (Ladisa et al., IEEE S&P 2023). Spracklen et al. measured hallucination rates of 5.2% for commercial models and 21.7% for open-source models across 576,000 code samples in Python and JavaScript, observing 205,474 unique hallucinated package names. However, no peer-reviewed study has measured whether the anti-abuse defenses operated by major package registries (PyPI, npm) actually catch hallucination-driven registrations.
+
+This work fills that gap by (1) systematically testing the catch rate of current registry defenses against hallucinated names, (2) identifying features that predict evasion, and (3) building a lightweight classifier that flags hallucinated names likely to evade defenses before they are registered by attackers.
 
 ## 2. Related Work
 
-**Seminal — Spracklen et al. (USENIX Security 2025)** "We Have a Package for You!" Tested 16 LLMs across Python/JS, 576k samples. Found 5.2% hallucination rate for commercial models, 21.7% for open-source; 205,474 unique hallucinated names. Evaluated RAG, self-detection, fine-tuning mitigations. arXiv:2406.10279.
+### 2.1 Package Hallucination (Core)
+**Spracklen et al. (USENIX Security 2025)** — "We Have a Package for You!" Tested 16 LLMs across Python/JS, 576k samples. Found 5.2% hallucination rate for commercial models, 21.7% for open-source; 205,474 unique hallucinated names. Evaluated RAG, self-detection, fine-tuning mitigations. Only peer-reviewed paper directly on this topic.
 
-**Replication — Churilov (2026)** arXiv:2605.17062. Re-tested 5 frontier models (Claude Sonnet 4.6, GPT-5.4-mini, Gemini 2.5 Pro, DeepSeek V3.2). Rates compressed to 4.62–6.10%. Found 127 model-agnostic hallucinated names; 53 still registrable after coordinated disclosure.
+### 2.2 Software Supply Chain Taxonomies & Ecosystems
+Zimmermann et al. (USENIX Security 2019) — npm dependency graph and blast radius. Oh et al. (DIMVA 2020) — Backstabber's Knife Collection, OSS supply chain attack review. Ladisa et al. (IEEE S&P 2023) — SoK: 107 attack vectors, 94 incidents, 33 safeguards.
 
-**Origin — Lanyado (2023)** vulcan.io. Demonstrated attack feasibility with `huggingface-cli` (30k+ downloads of empty package in 3 months).
+### 2.3 Typosquatting & Source-Package Discrepancy
+Vu et al. (EuroS&PW 2020) — PyPI typosquatting and combosquatting. Vu et al. (ESEC/FSE 2021) — LastPyMile, source-package discrepancy.
 
-**Systematic Review (2026)** Synthesis of 21 peer-reviewed + 7 industry reports. Maps defenses at IDE/registry/CI-CD/runtime layers.
+### 2.4 Malicious Package Detection
+Duan et al. (NDSS 2021, MALOSS) — 339 new malicious packages found. Scalco et al. (ARES 2022) — npm injection detection. Ladisa et al. (SCORED@CCS 2022, 2023; ACSAC 2023) — Java packages, third-party dependencies, cross-language detection. Huang et al. (USENIX Security 2024, DONAPI) — npm behavior-sequence mapping. Liu et al. (ASE 2024) — robust detection in industry. SpiderScan (ASE 2024) — graph-based behavior modeling. Gao et al. (USENIX Security 2025, MalGuard) — real-time detection. Guo et al. (USENIX Security 2026, PyGuard) — PyPI knowledge-mining.
 
-**Industry:** Socket, Trend Micro (Sean Park), Cloud Security Alliance, VulnIQ.
+### 2.5 Package Confusion & Install-Time Defenses (critical for this proposal)
+**Neupane et al. (USENIX Security 2023)** — "Beyond Typosquatting": 13 package-confusion categories, 360,333 confusion instances in npm. Conceptual bridge to slopsquatting. Taylor et al. (NSS 2020) — defending against package typosquatting. Ferreira et al. (ICSE 2021) — npm lightweight permission system. Wyss et al. (AsiaCCS 2022) — Latch, install-time attack mediation. Wyss et al. (ICSE 2022) — hidden code clones in npm.
 
-See `lit_review.md` for full table + gaps.
+### 2.6 AI Code Assistant Security
+Pearce et al. (IEEE S&P 2022) — Copilot emits insecure code. Sandoval et al. (USENIX Security 2023) — user study, AI assistant security. Perry et al. (CCS 2023) — users write more insecure code with AI. Tony et al. (TOSEM 2025) — prompting for secure code. Fu et al. (TOSEM 2025) — Copilot weaknesses in GitHub. Mastropaolo et al. (ICSE 2023) — Copilot prompt robustness.
 
-**Implication:** RQ1 (Python/JS prevalence) and RQ2 (registerability) are largely ANSWERED by Spracklen + Churilov. This proposal must PIVOT to one of the identified gaps.
+### 2.7 Code Hallucination Detection
+**Andriushchenko et al. (ACL Findings 2026)** — lightweight Transformer detector for code hallucinations using internal LLM representations. Closest peer-reviewed precedent for this proposal's classifier component.
 
-## 3. Research Questions (PIVOTED — pending decision)
+### 2.8 Software Composition Analysis & SBOM
+Dann et al. (TSE 2022) — OSS vulnerability scanner challenges. Zhao et al. (ESEC/FSE 2023) — SCA for Java. Alfadel et al. (TOSEM 2023) — npm discoverability. Imtiaz et al. (TSE 2023) — security releases.
 
-**Pick ONE pivot** from `lit_review.md` "Revised Pivots" section:
+### 2.9 SBOM, CI/CD, Supply Chain Integrity
+Xia et al. (ICSE 2023) — SBOM empirical study. Koishybayev et al. (USENIX Security 2022) — GitHub CI workflow security. Torres-Arias et al. (USENIX Security 2019) — in-toto supply chain integrity.
 
-- **~~Pivot A — Ecosystem Expansion~~** ELIMINATED: Krishna (2025) covers Rust, Haque (2025) covers Go.
-- **Pivot B — Agentic / MCP Hallucination:** Study hallucinations in agent tool calls (MCP servers, LangChain tools, function-calling schema). HIGH NOVELTY.
-- **Pivot C — Adversarial Fine-Tuning Attack:** Demonstrate attacker fine-tunes model to steer hallucinations to owned names. VERY HIGH NOVELTY, needs GPU.
-- **Pivot D — Registry Defense Benchmark:** Systematically measure whether PyPI/npm anti-abuse controls catch hallucination-driven registrations. WIDEST OPEN GAP (confirmed by 2 independent reviews). RECOMMENDED for 2-mo feasibility.
-- **Pivot E — Prompt-Variation Robustness:** Extend Twist et al. across all frontier models × registries. MEDIUM NOVELTY.
+### 2.10 Governance
+Oh et al. (IJAIBDCMS 2026) — PCI-DSS compliant CI/CD pipelines.
 
-**Top recommendation: Pivot D.**
+See `lit_review.md` for full annotated review with 37 peer-reviewed sources.
 
-**Decision needed:** [TBD]
+## 3. Research Questions
+
+- **RQ1:** How frequently do current PyPI and npm anti-abuse defenses (confusable-name rejection, quarantine, spam detection, squatting policy) catch hallucinated package names generated by state-of-the-art LLMs?
+- **RQ2:** What features of a hallucinated package name predict evasion of registry defenses (e.g., lexical similarity to popular packages, model consensus, length, popularity asymmetry)?
+- **RQ3:** Can a lightweight classifier predict defense evasion with sufficient precision to serve as a pre-registration early-warning tool for registry operators?
+- **RQ4:** How do hallucinated names distribute across the package-confusion taxonomy of Neupane et al. (2023), and which confusion categories correlate with defense evasion?
 
 ## 4. Methodology
 
-See README.md.
+### 4.1 Hallucination Generation
+- Run N frontier LLMs (e.g., Claude Sonnet, GPT-5, Gemini, DeepSeek, Llama, Mistral) on standard code-generation prompt datasets (Stack Overflow-derived, LLM-generated, similar to Spracklen).
+- Languages: Python and JavaScript (aligns with Spracklen for direct comparability).
+- Reuse Spracklen's open-source MIT-licensed pipeline (github.com/Spracks/PackageHallucination) where possible.
+
+### 4.2 Registry Snapshot
+- PyPI: full package name list via Simple API (`https://pypi.org/simple/`).
+- npm: full package name list via replicate endpoint or deps.dev API.
+- Snapshot date recorded for reproducibility.
+
+### 4.3 Registerability Classification (READ-ONLY)
+- For each hallucinated name: query whether the name is currently **unclaimed** on each registry.
+- **No package registration performed.** Pure read-only check.
+
+### 4.4 Defense Rule Simulation
+For each hallucinated name, apply each registry's published anti-abuse rules:
+
+**PyPI:**
+- Confusable-name rejection policy (names too similar to existing projects).
+- Quarantine criteria (per Mike Fiedler's Project Quarantine operational rules).
+- Reserved/prohibited name lists.
+
+**npm:**
+- First-come-first-served policy.
+- Narrow squatting definition (no genuine function).
+- Spam-detection heuristics.
+
+Predict: **blocked** / **passes**.
+
+### 4.5 Feature Engineering
+For each hallucinated name, extract:
+
+- Lexical: length, character n-grams, entropy.
+- Similarity: Levenshtein distance to top-N popular packages; Jaro-Winkler to top-1000.
+- Model consensus: number of distinct LLMs that hallucinate the name identically.
+- Popularity asymmetry: ratio of popularity to nearest real package.
+- Code context: where the hallucinated name appeared (function name, import statement, doc string).
+- Registry context: nearest real package age, maintainer count, download volume (via deps.dev or libraries.io).
+
+### 4.6 Classifier Training
+- Task: predict whether a hallucinated name will evade registry defenses.
+- Models: logistic regression (baseline), small Transformer (Andriushchenko 2026 methodology), random forest (interpretable baseline).
+- Train/test split: 70/30 stratified by registry.
+- Metrics: precision, recall, F1, ROC-AUC; per-registry breakdown.
+- Ablation: drop each feature group to identify signal sources.
+
+### 4.7 Confusion Taxonomy Mapping
+Cross-reference each hallucinated name to Neupane et al. (2023) 13 package-confusion categories. Quantify which categories correlate with defense evasion.
+
+### 4.8 Ethics
+- Zero package registration by researchers.
+- Read-only registry queries only.
+- Coordinated disclosure to PyPI Security and Socket teams if actively exploitable patterns discovered, following Spracklen/Churilov precedent.
+- No release of hallucinated-name lists that could enable attacks; share only with verified researchers and registry operators.
+- IRB review if required by institution.
 
 ## 5. Preliminary Results
 
@@ -57,17 +123,30 @@ TBD — pilot.
 
 | Week | Task |
 |------|------|
-| 1 | Repo, scrapers, lit review |
-| 2-3 | Pilot: 5 models x 500 tasks |
-| 4 | Registerability analysis |
-| 5-6 | Mitigation classifier v1 |
-| 7 | Full results + figures |
-| 8 | Proposal draft complete |
+| 1 | Methodology lock; clone Spracklen repo; PyPI/npm scrapers |
+| 2 | Run 5 frontier LLMs; extract hallucinations; deduplicate |
+| 3 | Apply each registry's defense rules; measure catch rates |
+| 4 | Build feature set; train classifier v1 |
+| 5 | Validate classifier; ablation studies |
+| 6 | Cross-reference Neupane taxonomy; analyze failure cases |
+| 7 | Write proposal sections + preliminary figures |
+| 8 | Polish; final proposal draft |
 
-## 7. Ethics
+## 7. Expected Contributions
 
-See README.md.
+1. **Empirical:** First peer-reviewed measurement of PyPI/npm defense catch rates against hallucination-driven registrations.
+2. **Methodological:** Reproducible pipeline for testing registry defenses against LLM-generated package names.
+3. **Practical:** Lightweight classifier that registry operators can use as a pre-registration early-warning signal.
+4. **Taxonomic:** Mapping of hallucinated names to Neupane's package-confusion categories, showing which attack patterns dominate.
 
-## References
+## 8. Ethics
 
-See `refs.bib`.
+See `README.md` and Section 4.8.
+
+## 9. Backup Pivot (if D rejected)
+
+**Pivot B — Agentic / MCP Hallucination.** Study hallucinations in agent tool calls (MCP servers, LangChain tools, OpenAI function-calling schema). No peer-reviewed study exists. Higher novelty, higher risk (ground-truth construction required). Methodology to be developed if D is not feasible.
+
+## 10. References
+
+See `refs.bib` (37 peer-reviewed sources).
